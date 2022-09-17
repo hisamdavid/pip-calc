@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Risk culclator</title>
+  <style>
+    body{
+      background-image: url("bg.jpg");
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+      color: aliceblue;
+    }
+    h1{
+      font-size: 5rem;
+      font-weight: 900;
+    }
+    .flex{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .btn{
+      background-color: red;
+      width: 150px;
+      margin: 20px;
+      height: 30px;
+      border-radius:9px;
+    }
+    .btn:hover{
+      cursor: pointer;
+    }
+    input{
+      margin: 5px;
+      height: 30px;
+    }
+    select{
+      margin: 5px;
+      height: 30px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="flex">
+    <h1></h1>
+    <div class="cont">
+      <div class="flex">
+        <input class="accountSize" type="text" placeholder="account size" autofocus oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');">
+        <input class="SL" type="text" placeholder="SL pips" autofocus oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');">
+      </div>
+      <select>
+        <option value="0.01">1%</option>
+        <option value="0.02">2%</option>
+        <option value="0.03">3%</option>
+        <option value="0.05">5%</option>
+        <option value="0.08">8%</option>
+        <option value="0.13">13%</option>
+      </select>
+    </div>
+    <div class="btn flex">Risk!</div>
+  </div>
+</body>
+<script>
+const cont= document.querySelector(".flex");
+document.querySelector(".btn").addEventListener('click',()=>{
+  let accountSize=document.querySelector(".accountSize").value;
+  let sl=document.querySelector(".SL").value;
+  let risk=document.querySelector("select").value;
+  let lot=((accountSize*risk)/(sl+6));
+  document.querySelector("h1").innerText=`${Math.floor(lot*100)/100}`;
+})
+</script>
+</html>
